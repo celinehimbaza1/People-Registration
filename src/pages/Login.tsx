@@ -10,16 +10,18 @@ export default function Login() {
   const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
+  e.preventDefault();
+  setError("");
 
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      navigate("/dashboard");
-    } catch (err: any) {
-      setError(err.message);
-    }
-  };
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    // Navigate to the register form after login
+    navigate("/register");
+  } catch (err: any) {
+    setError(err.message);
+  }
+};
+
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 px-4">
@@ -47,14 +49,14 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button className="w-full bg-black text-white py-2 rounded font-medium" type="submit">
+          <button className="w-full bg-black text-white py-1.5 rounded font-medium text-sm" type="submit">
             Login
           </button>
         </form>
 
         <p className="mt-4 text-center text-sm">
           Don’t have an account?{" "}
-          <button onClick={() => navigate("/signup")} className="text-blue-600 underline">
+          <button onClick={() => navigate("/signup")} className="text-blue-600 underline text-sm">
             Create account
           </button>
         </p>
