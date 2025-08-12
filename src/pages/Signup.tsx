@@ -19,7 +19,7 @@ export default function Signup() {
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      navigate("/dashboard");
+      navigate("/register");
     } catch (err: any) {
       setError(err.message);
     }
@@ -29,7 +29,7 @@ export default function Signup() {
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider);
-      navigate("/dashboard");
+      navigate("/register");
     } catch (err: any) {
       setError(err.message);
     }
@@ -44,13 +44,13 @@ export default function Signup() {
           <p className="text-red-600 text-sm mb-4 text-center">{error}</p>
         )}
 
-        {/* ✅ Signup form */}
         <form onSubmit={handleSignup} className="space-y-4">
           <input
             type="email"
             placeholder="Email address"
             className="w-full px-3 py-2 border rounded outline-none"
             value={email}
+            // --- THIS IS THE CORRECTED LINE ---
             onChange={(e) => setEmail(e.target.value)}
             required
           />
@@ -70,7 +70,6 @@ export default function Signup() {
           </button>
         </form>
 
-        {/* ✅ Google Sign-In Below the Form */}
         <div className="my-4">
           <button
             onClick={handleGoogleSignup}
